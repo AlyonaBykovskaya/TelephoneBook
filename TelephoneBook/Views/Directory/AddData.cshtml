@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Add Data";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model TelephoneBook.Models.Person
+@section adding{
+    <script type="text/javascript" src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            var noOfPhone = 0;
+
+            $("#btnAddTelephone").click(function() {
+                var phone = getNestedItemName("Phone", noOfPhone);
+                noOfPhone++;
+                $(".telephones").append("<input type='text' name='" + phone + "'/><p>");
+            });
+
+            function getNestedItemName(itemName, itemNumber) {
+                return (itemName + itemNumber);
+            }
+        });
+
+    </script>
+
+    @using (Html.BeginForm("AddData", "Directory", FormMethod.Post, new { id = "PersonForm" }))
+    {
+
+        <p>
+            @Html.LabelFor(m => m.Name, "Name")
+            <br />
+            @Html.TextBoxFor(m => m.Name)
+            @Html.ValidationMessageFor(m => m.Name)
+          
+        </p>
+        <p>
+            @Html.LabelFor(m => m.Surname, "Surname")
+            <br />
+            @Html.TextBoxFor(m => m.Surname)
+            @Html.ValidationMessageFor(m => m.Surname)
+ 
+        </p>
+        <div class="telephones"></div>
+        <input id="btnAddTelephone" type="button" value="Add Telephone" />
+
+        <p><input type="submit" value="Send" /> @Html.ActionLink("Return to the Directory", "ShowData", "Directory")</p>
+
+    }
+}

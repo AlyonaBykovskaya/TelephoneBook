@@ -1,0 +1,53 @@
+﻿
+@model IEnumerable<TelephoneBook.Models.Phone>
+
+@{
+    ViewBag.Title = "Directory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section data{
+
+    <p>
+        @Html.ActionLink("Add New Contact", "AddData")
+    </p>
+    <table>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Surname
+            </th>
+            <th>
+                Telephone
+            </th>
+
+            <th>
+                Functions
+
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Person.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Person.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telephone)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "EditData", new {id = item.Id}) |
+                    @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+                </td>
+            </tr>
+        }
+
+    </table>
+}

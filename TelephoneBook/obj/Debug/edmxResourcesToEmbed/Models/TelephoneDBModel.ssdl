@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TelephoneDatabaseModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="TelephoneDatabaseModelStoreContainer">
+    <EntitySet Name="Persons" EntityType="TelephoneDatabaseModel.Store.Persons" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Phones" EntityType="TelephoneDatabaseModel.Store.Phones" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="PK_Phones_Persons" Association="TelephoneDatabaseModel.Store.PK_Phones_Persons">
+      <End Role="Persons" EntitySet="Persons" />
+      <End Role="Phones" EntitySet="Phones" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Persons">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="Surname" Type="nvarchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Phones">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Telephone" Type="nvarchar" MaxLength="20" />
+    <Property Name="PersonId" Type="int" />
+  </EntityType>
+  <Association Name="PK_Phones_Persons">
+    <End Role="Persons" Type="TelephoneDatabaseModel.Store.Persons" Multiplicity="0..1" />
+    <End Role="Phones" Type="TelephoneDatabaseModel.Store.Phones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persons">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Phones">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Edit Data";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model TelephoneBook.Models.Phone
+@section edition{
+       
+@using (Html.BeginForm("EditData", "Directory", FormMethod.Post, new { id = "PersonForm" }))
+{
+    
+        @Html.HiddenFor(m => m.Id)
+       <p>
+            @Html.LabelFor(m => m.Person.Name, "Name")
+            <br />
+            @Html.EditorFor(m => m.Person.Name)
+
+            @Html.ValidationMessageFor(m => m.Person.Name)
+          
+        </p>
+        <p>
+            @Html.LabelFor(m => m.Person.Surname, "Surname")
+            <br />
+            @Html.EditorFor(m => m.Person.Surname)
+
+            @Html.ValidationMessageFor(m => m.Person.Surname)
+ 
+        </p>
+    <p>
+        @Html.LabelFor(m => m.Telephone, "Telephone")
+        <br />
+        @Html.EditorFor(m => m.Telephone)
+        @Html.ValidationMessageFor(m => m.Telephone)
+    </p>
+    
+    
+    
+        <p><input type="submit" value="Send" />@Html.ActionLink("Return to the Directory","ShowData","Directory")</p>
+
+}
+}

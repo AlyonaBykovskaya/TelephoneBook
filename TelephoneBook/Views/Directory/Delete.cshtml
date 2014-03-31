@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model  TelephoneBook.Models.Phone
+@section delete
+{
+    <h3>Are you sure that you want to delete this person?</h3>
+
+
+    <div class="display-label">Name:</div>
+    <div class="display-field">@Model.Person.Name</div>
+
+    <div class="display-label">Surname:</div>
+    <div class="display-field">@Model.Person.Surname</div>
+    
+    <div class="display-label">Telephone:</div>
+    <div class="display-field">@Model.Telephone</div>
+
+
+
+    @using (Html.BeginForm())
+    {
+        <p>
+            <input type="submit" value="Delete" /> |
+            @Html.ActionLink("No, Back to Dictionary", "ShowData")
+        </p>
+    }
+}
